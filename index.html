@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be Mine?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .heart {
+      width: 100px;
+      height: 90px;
+      position: relative;
+      animation: beat 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 90px;
+      background: red;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+    }
+
+    .heart {
+      transform: rotate(-45deg);
+      background: red;
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+
+    .message {
+      font-size: 24px;
+      color: #fff;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      color: #fff;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="heart"></div>
+<div class="message" id="message"></div>
+
+<script>
+  const message = "তুমি কি আমার জীবনসঙ্গী হতে চাও?";
+  let i = 0;
+  const typing = () => {
+    if (i < message.length) {
+      document.getElementById('message').innerHTML += message.charAt(i);
+      i++;
+      setTimeout(typing, 100);
+    }
+  };
+  typing();
+
+  // Add falling flowers
+  setInterval(() => {
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.style.left = Math.random() * window.innerWidth + "px";
+    flower.innerText = "🌸";
+    document.body.appendChild(flower);
+    setTimeout(() => {
+      flower.remove();
+    }, 5000);
+  }, 300);
+</script>
+
+</body>
+</html>
